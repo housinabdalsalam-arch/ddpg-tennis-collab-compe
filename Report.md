@@ -103,7 +103,7 @@ Architecture: **(48 → 256) + 4 → 256 → 1**
 
 The environment is solved when the average score over 100 episodes is **>= 0.5**.
 
-My agent solved the environment in **XXX episodes**, reaching an average score of **YY.YY** over the last 100 episodes.
+My agent solved the environment in 1446 episodes, reaching an average score of 0.502 over the last 100 episodes.
 
 ![Training curve](scores.png)
 
