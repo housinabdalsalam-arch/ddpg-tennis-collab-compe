@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Unity / large binaries
+Tennis_Windows_*/
+Tennis_Linux/
+Tennis.app/
+
+# Training outputs (keep weights if you want!)
+*.log
+
+# If you generate these, keep/remove as you like:
+# checkpoint_*.pth
+# scores.png
