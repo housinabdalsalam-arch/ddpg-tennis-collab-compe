@@ -9,10 +9,6 @@ I used a **basic MADDPG-style approach** (two DDPG agents learning together with
 <p align="center">
   <img src="media/tennis.gif" alt="Tennis Demo" width="700">
 </p>
-
-> Tip: keep the GIF under **100 MB** (GitHub file limit).  
-> If your GIF is too big, reduce FPS/size or record a shorter clip.
-
 ---
 
 ## Environment
