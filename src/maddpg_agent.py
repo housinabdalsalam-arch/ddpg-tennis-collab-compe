@@ -23,12 +23,12 @@ class MADDPGConfig:
     lr_critic = 1e-3
     weight_decay = 0.0
 
-    # Learning schedule (THIS is a big reason your training was "bad/slow")
+
     learn_every = 1
     learn_updates = 2
-    warmup_steps = 5000  # random actions at the beginning to avoid "no reward forever"
+    warmup_steps = 5000  
 
-    # OU Noise
+
     noise_mu = 0.0
     noise_theta = 0.15
     noise_sigma = 0.20
@@ -36,7 +36,6 @@ class MADDPGConfig:
     noise_scale_decay = 0.9995
     noise_scale_min = 0.10
 
-    # Grad clipping
     critic_grad_clip = 1.0
 
 
@@ -71,7 +70,7 @@ class ReplayBuffer:
         )
 
     def add(self, states, actions, rewards, next_states, dones):
-        # states: (N, S) actions: (N, A) rewards: (N,) next_states: (N,S) dones: (N,)
+
         e = self.experience(states, actions, rewards, next_states, dones)
         self.memory.append(e)
 
@@ -121,7 +120,6 @@ class DDPGAgent:
             sigma=cfg.noise_sigma,
         )
 
-        # hard-copy to start
         self._hard_update(self.actor_target, self.actor_local)
         self._hard_update(self.critic_target, self.critic_local)
 
@@ -168,7 +166,6 @@ class MADDPG:
         self.memory = ReplayBuffer(self.cfg.buffer_size, self.cfg.batch_size, seed=seed, device=self.device)
         self.t_step = 0
 
-        # ✅ this fixes your AttributeError
         self.noise_scale = self.cfg.noise_scale_start
 
     def reset(self):
@@ -199,7 +196,7 @@ class MADDPG:
 
     def learn(self, experiences):
         states, actions, rewards, next_states, dones = experiences
-        # states: (B, N, S), actions: (B, N, A), rewards: (B, N), dones: (B, N)
+
 
         B = states.shape[0]
         full_states = states.reshape(B, -1)
@@ -233,7 +230,7 @@ class MADDPG:
             agent.critic_optimizer.step()
 
             # -------- actor --------
-            # IMPORTANT: only agent i should get gradients (others detached)
+
             actions_pred_all = []
             for j, ag_j in enumerate(self.agents):
                 a_j = ag_j.actor_local(states[:, j, :])
@@ -246,9 +243,7 @@ class MADDPG:
 
             agent.actor_optimizer.zero_grad()
             actor_loss.backward()
-            agent.actor_optimizer.step()
 
-            # -------- soft update --------
             agent.soft_update(agent.critic_local, agent.critic_target, self.cfg.tau)
             agent.soft_update(agent.actor_local, agent.actor_target, self.cfg.tau)
 
