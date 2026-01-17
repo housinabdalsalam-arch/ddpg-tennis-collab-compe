@@ -24,7 +24,7 @@ Two agents control rackets and try to keep the ball in play:
   - move toward / away from the net
   - jump
 
-### Solved criterion (Udacity)
+### Solved criterion
 After each episode:
 1. Sum rewards for each agent → gives **2 scores**.
 2. Take the **maximum** of the two scores → this is the **episode score**.
