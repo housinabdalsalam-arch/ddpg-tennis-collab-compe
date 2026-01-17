@@ -47,7 +47,7 @@ def main():
         score_agents = np.zeros(num_agents, dtype=np.float32)
 
         for t in range(args.max_t):
-            # warmup: pure random actions to kick-start sparse rewards
+
             if total_steps < cfg.warmup_steps:
                 actions = np.random.uniform(-1.0, 1.0, size=(num_agents, action_size)).astype(np.float32)
             else:
@@ -69,7 +69,7 @@ def main():
 
         agent.decay_noise()
 
-        score = float(np.max(score_agents))  # Udacity scoring: max over both agents
+        score = float(np.max(score_agents))  
         scores_deque.append(score)
         scores_all.append(score)
 
@@ -78,7 +78,7 @@ def main():
         if i_episode % 10 == 0:
             print(f"Episode {i_episode}\tScore: {score:.3f}\tAverage(100): {avg:.3f}\tNoise: {agent.noise_scale:.3f}")
 
-        # save best rolling average (useful because training can be unstable)
+
         if avg > best_avg:
             best_avg = avg
             agent.save(prefix=args.prefix)
