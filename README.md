@@ -80,3 +80,10 @@ From the repository root:
 
 ```bash
 python src/train.py --env ./Tennis_Windows_x86_64/Tennis.exe --worker_id 1
+
+
+## Results
+
+- Solved in **1446 episodes**
+
+![Training scores](scores.png)
